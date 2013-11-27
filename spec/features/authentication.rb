@@ -11,13 +11,16 @@ feature "Authentication" do
   end
 
   scenario "succeeds with correct credentials" do 
-    u = FactoryGirl.create :user, email: 'kvirani@lighthouselabs.ca'
-    visit '/sessions/new'
-    fill_in 'email', with: u.email
-    fill_in 'password', with: 'gobbledigook'
-    click_button 'Log In'
+    create_user_and_login
     expect(page).to have_content 'Welcome back'
   end
 
+  scenario "able to logout successfully if logged in" do 
+    create_user_and_login
+    visit '/'
+    #page.save_screenshot('screenshot.png')
+    click_link 'Log out'
+    expect(page).to have_content 'Adios'
+  end
 
 end

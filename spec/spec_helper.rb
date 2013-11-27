@@ -8,6 +8,14 @@ require 'capybara/rspec'
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
 
+def create_user_and_login
+  @user = FactoryGirl.create :user, email: 'kvirani@lighthouselabs.ca'
+  visit '/sessions/new'
+  fill_in 'email', with: @user.email
+  fill_in 'password', with: 'gobbledigook'
+  click_button 'Log In'
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
