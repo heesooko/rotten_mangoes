@@ -4,10 +4,12 @@ describe ReviewsController do
 
 
   describe "Deleting a review" do 
-    it "should allow me to delete my review" do
+    before :each do 
       @review = FactoryGirl.create :review
-      params = { id: @review.id, movie_id: @review.movie.id }
       session[:user_id] = @review.user.id
+    end
+    it "should allow me to delete my review" do
+      params = { id: @review.id, movie_id: @review.movie.id } 
       delete :destroy, params
       review = assigns(:review) # @review from inside controller
       expect(review).to be_a(Review)
@@ -16,19 +18,16 @@ describe ReviewsController do
       expect(flash[:notice]).to eq("Deleted your review")
     end
     it "should not allow me to delete someone else's review" do 
-      @review = FactoryGirl.create :review
       @user = FactoryGirl.create :user
-      params = { id: @review.id, movie_id: @review.movie.id }
       session[:user_id] = @user.id
+      params = { id: @review.id, movie_id: @review.movie.id }
       expect { delete(:destroy, params) }.to raise_error
       review = assigns(:review) # @review from inside controller
       expect(review).to be_nil
     end
     it "should throw an error if review is not within given movie" do 
-      @review = FactoryGirl.create :review
       @movie = FactoryGirl.create :movie
       params = { id: @review.id, movie_id: @movie.id }
-      session[:user_id] = @review.user.id
       expect { delete(:destroy, params) }.to raise_error
       review = assigns(:review) # @review from inside controller
       expect(review).to be_nil
