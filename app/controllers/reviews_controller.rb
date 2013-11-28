@@ -18,6 +18,13 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    @review = @movie.reviews.where(user_id: current_user.id).find params[:id]
+    @review.destroy
+    flash[:notice] = "Deleted your review"
+    redirect_to @movie # redirect_to movie_path(@movie)
+  end
+
   protected
 
   def load_movie
