@@ -1,2 +1,19 @@
-<h1>Admin::Movies#index</h1>
+<h1>Movies!</h1>
 <p>Find me in app/views/admin/movies/index.html.erb</p>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.id %></td>
+        <td><%= movie.title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
