@@ -1,11 +1,23 @@
 RottenMangoes::Application.routes.draw do
   
-  resources :movies do
+  get 'movies/popular' => 'movies#popular' # not as kosher
+
+  get 'about' => 'about#index' # kosher
+  get 'about' => 'public#about'  # kosher
+  get 'faq' => 'public#faq'  # kosher
+
+  resources :movies do 
+    # index: /movies (collection) 
+    # show: /movies/5 (member) 
+    get :popular, on: :collection
     resources :reviews, only: [:new, :create]
   end
-  resources :users, only: [:new, :create]
+  resource :users, only: [:new, :create]
+  resource :profile, only: [:edit, :update]
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'movies#index'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

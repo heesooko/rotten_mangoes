@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
 
   def new
     @review = @movie.reviews.build
+    @review.rating_out_of_ten = 5
   end
 
   def create

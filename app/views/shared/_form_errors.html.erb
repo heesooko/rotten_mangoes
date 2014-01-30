@@ -1,0 +1,8 @@
+<div>
+  <%= pluralize(object.errors.count, "error") %> prevented this <%= object_name %> from being submitted:
+  <ul>
+    <% object.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,29 @@
+<h1>My Account</h1>
+<p>You can change your account information here</p>
+
+<%= form_for @user, url: profile_path do |f| %>
+  <% if @user.errors.any? %>
+    <%= render 'shared/form_errors', object: @user, object_name: "account" %>
+  <% end %>
+    
+  <p>
+    <%= f.label :firstname %>
+    <%= f.text_field :firstname %>
+  </p>
+
+  <p>
+    <%= f.label :lastname %>
+    <%= f.text_field :lastname %>
+  </p>
+
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+
+
+  <div>
+  <%= f.submit 'Update Your Profile!' %>
+  </div>
+<% end %>
+
