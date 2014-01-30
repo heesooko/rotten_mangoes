@@ -13,6 +13,9 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
 
     if @review.save
+      # recalculate the average rating stored in the movie record
+      @movie.average_rating = @movie.calculate_average_rating
+      @movie.save
       redirect_to @movie, notice: "Review created successfully"
     else
       render :new

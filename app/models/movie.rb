@@ -22,7 +22,7 @@ class Movie < ActiveRecord::Base
 
   validate :release_date_is_in_the_future
 
-  def review_average
+  def calculate_average_rating
     return nil unless reviews.any?
     reviews.sum(:rating_out_of_ten) / reviews.size
   end

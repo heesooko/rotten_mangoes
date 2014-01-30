@@ -7,8 +7,9 @@ class MoviesController < ApplicationController
   def popular
     #render text: "hello, welcome to popular movies!"
     # only fetch @movies that have a average review of 7 or greater
-    # @movies = Movie.where("average_rating > ?", 7) # won't work b/c there is no average column. We'd have to join with reviews table
-    @movies = Movie.all.select { |m| m.review_average >= 7 if m.review_average }
+    @movies = Movie.where("average_rating > ?", 7) # won't work b/c there is no average column. We'd have to join with reviews table
+    #@movies = Movie.all.select { |m| m.average_rating >= 7 if m.average_rating }
+
     #render text: @movies.inspect # for easy debugging instead of creating a view
   end
 
