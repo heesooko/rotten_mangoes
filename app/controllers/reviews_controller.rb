@@ -14,6 +14,7 @@ class ReviewsController < ApplicationController
 
     if @review.save
       # recalculate the average rating stored in the movie record
+      # TODO: This works, but it's business logic and should thus be in the Model layer
       @movie.average_rating = @movie.calculate_average_rating
       @movie.save
       redirect_to @movie, notice: "Review created successfully"
