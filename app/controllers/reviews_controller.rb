@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
 
   before_filter :restrict_access
   before_filter :load_movie
+  before_filter :disallow_multiple_reviews, only: [:new]
 
   def new
     @review = @movie.reviews.build
@@ -20,6 +21,12 @@ class ReviewsController < ApplicationController
   end
 
   protected
+
+  def disallow_multiple_reviews
+    if @movie.already_reviewed_by?(current_user)
+      redirect_to @movie, alert: "You've already reviewed this movie"
+    end
+  end
 
   def load_movie
     @movie = Movie.find(params[:movie_id])
