@@ -27,12 +27,19 @@ class Movie < ActiveRecord::Base
     reviews.sum(:rating_out_of_ten) / reviews.size
   end
 
+  before_destroy :disallow_deletion_if_has_reviews
+
   protected
 
   def release_date_is_in_the_future
     if release_date.present?
       errors.add(:release_date, "should probably be in the future") if release_date < Date.today
     end
+  end
+
+  def disallow_deletion_if_has_reviews
+    return false if self.reviews.size > 0
+    true
   end
 
 end

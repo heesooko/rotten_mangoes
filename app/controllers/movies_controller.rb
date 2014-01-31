@@ -47,8 +47,14 @@ class MoviesController < ApplicationController
 
   def destroy
     @movie = Movie.find(params[:id])
-    @movie.destroy
-    redirect_to movies_path
+    if @movie.destroy
+      flash[:notice] = "No more movie!" # :notice
+      redirect_to movies_path
+    else
+      # no dice
+      flash[:alert] = "Don't do that man. This movie has reviews!" # :notice
+      redirect_to movie_path(@movie)
+    end
   end
 
   protected
