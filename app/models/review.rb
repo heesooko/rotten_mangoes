@@ -18,5 +18,15 @@ class Review < ActiveRecord::Base
     numericality: { greater_than_or_equal_to: 1 }
   validates :rating_out_of_ten,
     numericality: { less_than_or_equal_to: 10 }
+
+  after_create :recalculate_average_rating_for_movie
+
+  protected
+
+  def recalculate_average_rating_for_movie
+    puts "Business time"
+    self.movie.average_rating = self.movie.calculate_average_rating
+    self.movie.save
+  end
     
 end

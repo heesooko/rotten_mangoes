@@ -10,13 +10,13 @@ class ReviewsController < ApplicationController
 
   def create
     @review = @movie.reviews.build(review_params)
-    @review.user_id = current_user.id
+    @review.user = current_user
 
     if @review.save
       # recalculate the average rating stored in the movie record
       # TODO: This works, but it's business logic and should thus be in the Model layer
-      @movie.average_rating = @movie.calculate_average_rating
-      @movie.save
+      # @movie.average_rating = @movie.calculate_average_rating
+      # @movie.save
       redirect_to @movie, notice: "Review created successfully"
     else
       render :new
