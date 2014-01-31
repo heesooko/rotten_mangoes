@@ -25,10 +25,8 @@ class Review < ActiveRecord::Base
   protected
 
   def initial_review_from_user
-    self.movie.reviews.each do |review|
-      if review.user == self.user
-        self.errors.add :base, "You've already reviewed this movie"
-      end
+    if self.movie.already_reviewed_by?(self.user)
+      self.errors.add :base, "You've already reviewed this movie"
     end
   end
 
