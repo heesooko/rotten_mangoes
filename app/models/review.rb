@@ -20,18 +20,16 @@ class Review < ActiveRecord::Base
     numericality: { less_than_or_equal_to: 10 }
 
   after_create :recalculate_average_rating_for_movie
-  before_create :disallow_if_already_reviewed
+  validate :initial_review_from_user
 
   protected
 
-  def disallow_if_already_reviewed
+  def initial_review_from_user
     self.movie.reviews.each do |review|
       if review.user == self.user
         self.errors.add :base, "You've already reviewed this movie"
-        return false
       end
     end
-    true
   end
 
   def recalculate_average_rating_for_movie

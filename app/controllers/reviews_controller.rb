@@ -11,11 +11,7 @@ class ReviewsController < ApplicationController
   def create
     @review = @movie.reviews.build(review_params)
     @review.user = current_user 
-    # loop through all reviews for the @movie
-    # and check if one of them is from the current_user
-    # if we get one back, disallow creation and 
-    # return error to user
-
+   
     if @review.save
       redirect_to @movie, notice: "Review created successfully"
     else

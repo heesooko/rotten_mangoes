@@ -15,7 +15,13 @@
     <p><%= review.rating_out_of_ten %>/10</p>
     <small>- <%= review.user.full_name %></small><br/>
   <% end %>
-  <p><%= link_to "Write a review!", new_movie_review_path(@movie) %></p>
+  <p>
+  <% if @movie.already_reviewed_by?(current_user) %>
+    Thank you for your review of this movie.
+  <% else %>
+    <%= link_to "Write a review!", new_movie_review_path(@movie) %>
+  <% end %>
+  </p>
 <% else %>
   <p>Please <%= link_to "log in", new_session_path %> to see reviews and add your own.</p> 
 <% end %>

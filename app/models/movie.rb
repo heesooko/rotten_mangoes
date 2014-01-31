@@ -22,12 +22,26 @@ class Movie < ActiveRecord::Base
 
   validate :release_date_is_in_the_future
 
+  before_destroy :disallow_deletion_if_has_reviews
+
   def calculate_average_rating
     return nil unless reviews.any?
     reviews.sum(:rating_out_of_ten) / reviews.size
   end
 
-  before_destroy :disallow_deletion_if_has_reviews
+  # loop through all reviews for the @movie
+  # and check if one of them is from the current_user
+  # if we get one back, disallow creation and 
+  # return error to user
+
+  def already_reviewed_by?(user)
+    self.reviews.each do |review|
+      return true if review.user == user
+    end
+    false
+  end
+
+
 
   protected
 
