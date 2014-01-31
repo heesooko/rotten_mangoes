@@ -52,7 +52,8 @@ class MoviesController < ApplicationController
       redirect_to movies_path
     else
       # no dice
-      flash[:alert] = "Don't do that man. This movie has reviews!" # :notice
+      reason = @movie.errors.full_messages.first
+      flash[:alert] = "Don't do that man: #{reason}" # :notice
       redirect_to movie_path(@movie)
     end
   end

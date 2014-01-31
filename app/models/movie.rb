@@ -38,7 +38,10 @@ class Movie < ActiveRecord::Base
   end
 
   def disallow_deletion_if_has_reviews
-    return false if self.reviews.size > 0
+    if self.reviews.size > 0
+      self.errors.add :base, "Movie has reviews"
+      return false 
+    end
     true
   end
 
