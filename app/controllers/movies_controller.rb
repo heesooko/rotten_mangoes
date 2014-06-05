@@ -2,6 +2,19 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+
+    if params[:title].present?
+      @movies = @movies.where(title: params[:title])
+    end
+
+    if params[:director].present?
+      @movies = @movies.where(director: params[:director])
+    end
+
+    if params[:duration].present?
+      @movies = @movies.where(runtime_in_minutes: params[:duration])
+    end
+
   end
 
   def show

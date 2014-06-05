@@ -1,6 +1,30 @@
 <h1>Rotten Mangoes</h1>
 <%= link_to "Submit a movie!", new_movie_path %>
 <hr>
+
+<%= form_tag movies_path, method: :get do %>
+  Title: <%= text_field_tag :title, params[:title] %>
+
+  Director: <%= text_field_tag :director, params[:director] %>
+
+  Duration:
+  <%= select_tag :duration,
+    options_for_select([
+      ['Any', ''],
+      ['60 minutes', '60'],
+      ['120 minutes', '120']
+    ], params[:duration]) %>
+<!--   <select name="duration">
+    <option value=""></option>
+    <option value="60" <% if params[:duration] == '60' %> selected="true" <% end %>>60 minutes</option>
+    <option value="120" <% if params[:duration] == '120' %> selected="true" <% end %>>120 minutes</option>
+  </select> -->
+
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<hr>
+
 <% @movies.each do |movie| %>
   <%= link_to image_tag(movie.poster_image_url), movie_path(movie) %>
   <h2><%= link_to movie.title, movie %> | <%= movie.review_average %>/10</h2>
