@@ -1,0 +1,14 @@
+<tr>
+  <td>
+    <%= user.id %>
+  </td>
+  <td>
+    <%= user.full_name %>
+  </td>
+  <% unless user == current_user %>
+    <td>
+      <%= link_to 'Preview', preview_admin_user_path(user), method: :post %>
+      <%= link_to 'Preview', [:preview, :admin, user], method: :post %>
+    </td>
+  <% end %>
+</tr>

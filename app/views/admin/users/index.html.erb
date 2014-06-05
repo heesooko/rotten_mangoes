@@ -1,0 +1,13 @@
+<h1>All Users</h1>
+
+<% if false %>
+  <% form_for @user do |f| %>
+    <%= render :partial => 'form', :locals => { :form => f } %>
+    <%= render 'form', :form => f %>
+    <%= render f %>
+  <% end %>
+<% end %>
+
+<table>
+  <%= render @users %>
+</table>
