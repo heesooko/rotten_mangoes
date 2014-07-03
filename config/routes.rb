@@ -1,11 +1,29 @@
 RottenMangoes::Application.routes.draw do
-  
+
   resources :movies do
     resources :reviews, only: [:new, :create]
   end
   resources :users, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
+
+  resource :profile, only: [:edit, :update]
+
+  # EDIT: /users/:id/edit
+  # UPDATE: /users/:id (PUT/PATCH) => users#update
+
+  # GET /users/8/edit
+  # - Need to look in the session[:user_id] to see who is the current user and what is their ID
+  # - Only allow if they match, otherwise take somewhere else (/users/7/edit)
+
+  # /profile/edit
+  # - @user = User.find(params[:id])
+  # - @user = current_user # => User.find(session[:user_id])
+
   root to: 'movies#index'
+
+  # resources :movies do
+  #   resources :reviews
+  # end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -47,7 +65,7 @@ RottenMangoes::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

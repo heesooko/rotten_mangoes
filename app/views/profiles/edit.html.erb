@@ -1,0 +1,9 @@
+<h1>Edit My Profile</h1>
+
+<%= form_for @user, url: profile_path do |f| %>
+
+  Email: <%= f.text_field :email %>
+  <br/>
+  <%= f.submit 'Update My Profile!!' %>
+
+<% end %>
