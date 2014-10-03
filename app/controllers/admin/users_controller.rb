@@ -4,4 +4,9 @@ class Admin::UsersController < Admin::BaseController
     @users = User.all
   end
 
+  # PUT /admin/users/:user_id/switch
+  def switch
+
+  end
+
 end
