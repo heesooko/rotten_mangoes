@@ -1,5 +1,9 @@
 RottenMangoes::Application.routes.draw do
-  
+  # scope :admin, module: :admin, as: :admin do
+  namespace :admin do
+    resources :users
+  end
+
   resources :movies do
     resources :reviews, only: [:new, :create]
   end
@@ -47,7 +51,7 @@ RottenMangoes::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
