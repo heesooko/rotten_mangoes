@@ -1,7 +1,11 @@
 RottenMangoes::Application.routes.draw do
   # scope :admin, module: :admin, as: :admin do
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        put :switch
+      end
+    end
   end
 
   resources :movies do
