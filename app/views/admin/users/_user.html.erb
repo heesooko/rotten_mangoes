@@ -8,7 +8,7 @@
   <td>
     <% unless user.admin? %>
       <%#= link_to 'switch', switch_admin_user_path(user) %>
-      <%= link_to 'switch', [:switch, :admin, user] %>
+      <%= link_to 'switch', [:switch, :admin, user], method: :put %>
     <% end %>
   </td>
 </tr>
