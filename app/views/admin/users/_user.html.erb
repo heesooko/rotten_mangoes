@@ -6,6 +6,8 @@
     <%= user.email %>
   </td>
   <td>
-    
+    <% unless user.admin? %>
+      <%= link_to 'switch', '' %>
+    <% end %>
   </td>
 </tr>
