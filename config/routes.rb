@@ -1,10 +1,21 @@
 RottenMangoes::Application.routes.draw do
-  
+
   resources :movies do
     resources :reviews, only: [:new, :create]
   end
   resources :users, only: [:new, :create]
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :session, only: [:new, :create, :destroy]
+
+  # resources :profiles, only: [:show, :index]
+  resources :profiles, only: [:index, :show]
+  # Scope == Namespace
+  # scope path: 'your', module: 'my', as: 'my' do
+  namespace :my do
+    resources :reviews, only: [:index]
+    resource :profile, only: [:edit, :update] # single it's singular
+  end
+  
+
   root to: 'movies#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

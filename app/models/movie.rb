@@ -20,10 +20,10 @@ class Movie < ActiveRecord::Base
   validates :release_date,
     presence: true
 
-  validate :release_date_is_in_the_future
+  # validate :release_date_is_in_the_future
 
   def review_average
-    reviews.sum(:rating_out_of_ten)/reviews.size
+    reviews.sum(:rating_out_of_ten) / reviews.size if reviews.any?
   end
 
   protected
