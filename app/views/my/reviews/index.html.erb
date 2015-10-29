@@ -1,5 +1,7 @@
-<h1> Your Reviews </h1>
+<h1> Your Favourite Reviews </h1>
 
-<% @reviews.each do |review| %>
-  <%= render review %>
-<% end %>
+<%= render @reviews %>
+
+<h2>Short Film Reviews</h2>
+
+<%= render @short_film_reviews %>
