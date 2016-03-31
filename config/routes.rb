@@ -7,6 +7,21 @@ RottenMangoes::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'movies#index'
 
+  
+  # ADMINS ONLY HERE (FOR BREAKOUT MARCH 31)
+  namespace :admin do
+    resources :users, only: [:index] do 
+      # post :impersonate, on: :member
+      # which can also be written as:
+      member do
+        post :impersonate
+      end
+      # a more RESTful way is to treat this custom action as a 
+      #   new resource that is being created
+      # resource :impersonation, only: [:create, :destroy]
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

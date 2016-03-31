@@ -1,0 +1,11 @@
+<tr>
+  <td>
+    <%= user.firstname %>
+  </td>
+  <td>
+    <%= user.lastname %>
+  </td>
+  <td>
+    <%= link_to 'Impersonate', impersonate_admin_user_path(user), method: :post, confirm: 'Sure dude?' %>
+  </td>
+</tr>
